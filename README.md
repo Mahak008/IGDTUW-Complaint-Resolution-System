@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a web application developed with Spring Boot, utilizing HTML, CSS, and Bootstrap for the frontend. It employs MongoDB as the database for storing data and Maven for dependency management.
+This project is a university complaint resolution system developed with Spring Boot, featuring a frontend built using HTML, CSS, and Bootstrap. MongoDB is employed for managing and storing complaint data, while Maven handles dependency management. The system streamlines the complaint submission, tracking, and resolution process to enhance administrative efficiency and transparency.
 
 ## Features
 
