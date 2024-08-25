@@ -1,6 +1,6 @@
-# IGDTUW-Complaint-Resolution-System
+<h1 align = "center"> IGDTUW-Complaint-Resolution-System </h1>
 
-## Description
+## Introduction
 
 This project is a web application developed with Spring Boot, utilizing HTML, CSS, and Bootstrap for the frontend. It employs MongoDB as the database for storing data and Maven for dependency management.
 
@@ -57,26 +57,10 @@ If you want to contribute to this project, please follow these steps:
 
 1. **Fork the repository**: Click the "Fork" button at the top right of the repository page to create your own copy.
 2. **Create a new branch**: Switch to a new branch for your changes.
-    ```bash
-    git checkout -b feature-branch
-    ```
 3. **Commit your changes**: Add your changes and commit them with a meaningful message.
-    ```bash
-    git commit -am 'Add new feature'
-    ```
 4. **Push to the branch**: Push your changes to your forked repository.
-    ```bash
-    git push origin feature-branch
-    ```
 5. **Create a new Pull Request**: Navigate to the original repository and click on "New Pull Request". Provide a description of your changes and submit the pull request for review.
 
-## License
+## Show some ❤️
+If you like this project, please give it a ⭐ on [Github](https://github.com/Mahak008/IGDTUW-Complaint-Resolution-System)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- [Spring Boot](https://spring.io/projects/spring-boot) for providing the framework
-- [Bootstrap](https://getbootstrap.com) for the front-end framework and styling components
-- [MongoDB](https://www.mongodb.com) for the database management
-- [Eclipse IDE](https://www.eclipse.org) for the development environment
