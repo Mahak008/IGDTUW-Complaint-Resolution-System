@@ -18,7 +18,7 @@ public class Complaint {
     private String description;
     private String attachmentPath; // Path to the uploaded file
     private String status;
-    
+
     public Complaint() {
         this.status = "Pending"; // Default status
     }
@@ -102,6 +102,7 @@ public class Complaint {
     public void setAttachmentPath(String attachmentPath) {
         this.attachmentPath = attachmentPath;
     }
+
     public String getStatus() {
         return status;
     }

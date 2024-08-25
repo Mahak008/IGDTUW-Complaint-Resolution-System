@@ -16,6 +16,7 @@ public class StudentService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     private final StudentRepository studentRepository;
+
     @Autowired
     public StudentService(StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
@@ -40,7 +41,7 @@ public class StudentService implements UserDetailsService {
         studentRepository.save(student);
         logger.info("User with email {} registered successfully", student.getEmail());
     }
-    
+
     public Student findStudentByEmail(String email) {
         return studentRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Student not found"));

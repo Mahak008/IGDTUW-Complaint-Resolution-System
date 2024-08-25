@@ -28,13 +28,13 @@ public class ComplaintService {
             throw new RuntimeException("Failed to register complaint", e);
         }
     }
-    
+
     // method to get all complaints
     public List<Complaint> getAllComplaints() {
         return complaintRepository.findAll();
     }
-    
- // Method to get complaints by student's enrollment number
+
+    // Method to get complaints by student's enrollment number
     public List<Complaint> getComplaintsByEmail(String email) {
         return complaintRepository.findByEmail(email);
     }

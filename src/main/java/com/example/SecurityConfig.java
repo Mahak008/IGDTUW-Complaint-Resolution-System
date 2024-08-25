@@ -30,32 +30,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/", "/admin/admin_login", "/student/login", "/student/register", "/css/**").permitAll()
-                .requestMatchers("/student/student", "/complaint").authenticated()
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                .loginPage("/student/login")
-                .loginProcessingUrl("/student/login")
-                .usernameParameter("email")  // Specify the username parameter
-                .passwordParameter("password")  // Specify the password parameter
-                .permitAll()
-                .defaultSuccessUrl("/student/dashboard", true)
-                .failureUrl("/student/login?error=true")
-                .successHandler((request, response, authentication) -> {
-                    logger.info("Login successful for user: {}", authentication.getName());
-                    response.sendRedirect("/student/dashboard");
-                })
-                .failureHandler((request, response, exception) -> {
-                    logger.error("Login failed: {}", exception.getMessage());
-                    response.sendRedirect("/student/login?error=true");
-                })
-            )
-            .logout(logout -> logout
-                .permitAll()
-                .logoutSuccessUrl("/student/login?logout=true")
-            ).csrf(csrf -> csrf.disable());
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/", "/admin/admin_login", "/student/login", "/student/register", "/css/**")
+                        .permitAll()
+                        .requestMatchers("/student/student", "/complaint").authenticated()
+                        .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/student/login")
+                        .loginProcessingUrl("/student/login")
+                        .usernameParameter("email") // Specify the username parameter
+                        .passwordParameter("password") // Specify the password parameter
+                        .permitAll()
+                        .defaultSuccessUrl("/student/dashboard", true)
+                        .failureUrl("/student/login?error=true")
+                        .successHandler((request, response, authentication) -> {
+                            logger.info("Login successful for user: {}", authentication.getName());
+                            response.sendRedirect("/student/dashboard");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            logger.error("Login failed: {}", exception.getMessage());
+                            response.sendRedirect("/student/login?error=true");
+                        }))
+                .logout(logout -> logout
+                        .permitAll()
+                        .logoutSuccessUrl("/student/login?logout=true"))
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
