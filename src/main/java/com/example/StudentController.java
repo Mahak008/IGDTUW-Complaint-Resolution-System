@@ -121,17 +121,17 @@ public class StudentController {
             @RequestParam("attachment") MultipartFile attachment,
             Model model) {
         try {
-            // Save the attachment to a local directory or cloud storage
+            // Save the attachment to a local directory
             String attachmentPath = null;
             if (!attachment.isEmpty()) {
-                String fileName = attachment.getOriginalFilename();
-                attachmentPath = "uploads/" + fileName; // Specify your upload directory
-                Path path = Paths.get(attachmentPath);
-                Files.createDirectories(path.getParent()); // Create directories if they don't exist
+                String fileName = System.currentTimeMillis() + "_" + attachment.getOriginalFilename();
+                attachmentPath = fileName;
+                Path path = Paths.get("src/main/resources/static/complaints_images/" + attachmentPath);
+                Files.createDirectories(path.getParent());
                 Files.copy(attachment.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
             }
 
-            // Create a new Complaint object and populate it with form data
+            // Create and save the Complaint
             Complaint complaint = new Complaint();
             complaint.setEnrollmentNumber(enrollmentNumber);
             complaint.setName(name);
@@ -143,10 +143,8 @@ public class StudentController {
             complaint.setDescription(description);
             complaint.setAttachmentPath(attachmentPath);
 
-            // Save the complaint to the database
             complaintService.saveComplaint(complaint);
 
-            // Redirect to the dashboard with a success message
             model.addAttribute("message", "Complaint registered successfully.");
         } catch (IOException e) {
             model.addAttribute("error", "Failed to upload attachment: " + e.getMessage());
@@ -156,8 +154,9 @@ public class StudentController {
             return "student";
         }
 
-        return "redirect:/student/dashboard"; // Redirect to the dashboard
+        return "redirect:/student/dashboard";
     }
+
 
     @GetMapping("/student/allComplaints")
     public String viewAllComplaints(Model model, Authentication authentication) {
