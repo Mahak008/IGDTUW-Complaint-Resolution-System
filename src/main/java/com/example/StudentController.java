@@ -1,12 +1,5 @@
 package com.example;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -43,7 +43,7 @@ public class StudentController {
             @RequestParam("password") String password,
             @RequestParam("photo") MultipartFile photo,
             Model model) {
-                
+
         // Handle the photo upload
         String photoPath = null;
         try {
@@ -86,7 +86,6 @@ public class StudentController {
         String email = authentication.getName(); // Get the logged-in user's email
         Student student = studentService.findStudentByEmail(email); // Fetch student details from DB
 
-        // Correctly format the profile image URL
         String profileImageUrl = student.getPhotoPath() != null ? "/user_profile/" + student.getPhotoPath()
                 : "/images/user-profile.jpg";
         model.addAttribute("student", student);
@@ -100,7 +99,6 @@ public class StudentController {
         String email = authentication.getName(); // Get logged-in user's email
         Student student = studentService.findStudentByEmail(email); // Fetch student details from DB
 
-        // Correctly format the profile image URL
         String profileImageUrl = student.getPhotoPath() != null ? "/user_profile/" + student.getPhotoPath()
                 : "/images/user-profile.jpg";
         model.addAttribute("student", student);
@@ -112,7 +110,6 @@ public class StudentController {
     @PostMapping("/registerComplaint")
     public String registerComplaint(@RequestParam("enrollmentNumber") String enrollmentNumber,
             @RequestParam("name") String name,
-            @RequestParam("mobile") String mobile,
             @RequestParam("email") String email,
             @RequestParam("course") String course,
             @RequestParam("department") String department,
@@ -135,7 +132,6 @@ public class StudentController {
             Complaint complaint = new Complaint();
             complaint.setEnrollmentNumber(enrollmentNumber);
             complaint.setName(name);
-            complaint.setMobile(mobile);
             complaint.setEmail(email);
             complaint.setCourse(course);
             complaint.setDepartment(department);
@@ -157,7 +153,6 @@ public class StudentController {
         return "redirect:/student/dashboard";
     }
 
-
     @GetMapping("/student/allComplaints")
     public String viewAllComplaints(Model model, Authentication authentication) {
         List<Complaint> allComplaints = complaintService.getAllComplaints();
@@ -172,7 +167,7 @@ public class StudentController {
         model.addAttribute("profileImageUrl", profileImageUrl);
         model.addAttribute("complaints", allComplaints);
 
-        return "all_complaints"; // This should be the name of your HTML file
+        return "all_complaints";
     }
 
     @GetMapping("/student/myComplaints")
@@ -188,7 +183,7 @@ public class StudentController {
         model.addAttribute("profileImageUrl", profileImageUrl);
         model.addAttribute("complaints", myComplaints);
 
-        return "my_complaints"; // This should be the name of your HTML file
+        return "my_complaints";
     }
 
     @GetMapping("/student_profile")
@@ -196,14 +191,13 @@ public class StudentController {
         String email = authentication.getName(); // Get logged-in user's email
         Student student = studentService.findStudentByEmail(email); // Fetch student details from DB
 
-        // Correctly format the profile image URL
         String profileImageUrl = student.getPhotoPath() != null ? "/user_profile/" + student.getPhotoPath()
                 : "/images/user-profile.jpg";
         model.addAttribute("student", student);
         model.addAttribute("profileImageUrl", profileImageUrl);
 
         model.addAttribute("student", student);
-        return "student_profile"; // Ensure this is the correct view name
+        return "student_profile";
     }
 
     @PostMapping("/student/updatePassword")

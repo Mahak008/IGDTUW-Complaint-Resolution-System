@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class ComplaintService {
 
     private static final Logger logger = LoggerFactory.getLogger(ComplaintService.class);
-
     private final ComplaintRepository complaintRepository;
 
     @Autowired

@@ -14,7 +14,6 @@ import java.util.Optional;
 public class StudentService implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
-
     private final StudentRepository studentRepository;
 
     @Autowired

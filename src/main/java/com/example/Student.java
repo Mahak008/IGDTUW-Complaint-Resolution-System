@@ -15,7 +15,6 @@ public class Student implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     // with this name, the field will be stored in database
-
     @Id
     private String id;
 
@@ -42,7 +41,7 @@ public class Student implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_STUDENT"));
     }
 
     @Override
