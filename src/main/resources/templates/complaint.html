@@ -18,7 +18,6 @@
 
       <div class="profile-dropdown">
         <input type="checkbox" id="profile-toggle" class="profile-toggle" />
-
         <label for="profile-toggle" class="profile-link">
           <img
             th:src="@{${profileImageUrl}}"
@@ -67,18 +66,6 @@
         </div>
 
         <div class="form-group">
-          <label for="mobile">Mobile Number</label>
-          <input
-            type="tel"
-            id="mobile"
-            name="mobile"
-            class="form-control"
-            required
-            pattern="[0-9]{10}"
-          />
-        </div>
-
-        <div class="form-group">
           <label for="email">Email</label>
           <input
             type="email"
@@ -92,17 +79,14 @@
 
         <div class="form-group">
           <label for="course">Course</label>
-          <select id="course" name="course" class="form-control" required>
-            <option value="" disabled selected>Select Course</option>
-            <option value="BTech">BTech</option>
-            <option value="BBA">BBA</option>
-            <option value="BArch">BArch</option>
-            <option value="MBA">MBA</option>
-            <option value="MCA">MCA</option>
-            <option value="MTech">MTech</option>
-            <option value="MPlan">MPlan</option>
-            <option value="PhD">PhD</option>
-          </select>
+          <input
+            type="text"
+            id="course"
+            name="course"
+            class="form-control"
+            th:value="${student.course}"
+            required
+          />
         </div>
 
         <div class="form-group">
@@ -112,7 +96,7 @@
             id="department"
             name="department"
             class="form-control"
-            placeholder="Department"
+            th:value="${student.department}"
             required
           />
         </div>
@@ -126,11 +110,11 @@
             required
           >
             <option value="">Select a type</option>
-            <option value="academic">Academics</option>
-            <option value="administrative">Administrative</option>
-            <option value="technical">Technical</option>
-            <option value="facility">Sanitation</option>
-            <option value="other">Other</option>
+            <option value="Academics">Academics</option>
+            <option value="Administrative">Administrative</option>
+            <option value="Technical">Technical</option>
+            <option value="Sanitation">Sanitation</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
