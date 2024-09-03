@@ -1,58 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Complaints</title>
     <link rel="stylesheet" href="/css/dashboard.css" />
-    <link
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
 
-  <body>
-    <nav class="navbar">
-      <a href="/student/dashboard" class="navbar-link">Dashboard</a>
-
-      <div class="profile-dropdown">
+<body>
+<nav class="navbar">
+    <a href="/student/dashboard" class="navbar-link">Dashboard</a>
+    <div class="profile-dropdown">
         <input type="checkbox" id="profile-toggle" class="profile-toggle" />
-
         <label for="profile-toggle" class="profile-link">
-          <img
-            th:src="@{${profileImageUrl}}"
-            alt="Profile Icon"
-            class="profile-icon"
-          />
+            <img th:src="@{${profileImageUrl}}" alt="Profile Icon" class="profile-icon" />
         </label>
-
         <div class="dropdown-content">
-          <a href="/student_profile">My Profile</a>
-          <a href="/logout">Logout</a>
+            <a href="/student_profile">My Profile</a>
+            <a href="/logout">Logout</a>
         </div>
-      </div>
-    </nav>
-
-    <div class="container mt-5">
-      <h2>My Complaints</h2>
-      
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Complaint Type</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr th:each="complaint : ${complaints}">
-            <td th:text="${complaint.complaintType}"></td>
-            <td th:text="${complaint.description}"></td>
-            <td th:text="${complaint.status}"></td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </body>
+</nav>
+
+<div class="container mt-5">
+    <h2>My Complaints</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Complaint Type</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="complaint : ${complaints}">
+                <td th:text="${complaint.complaintType}"></td>
+                <td>
+                    <img th:src="${complaint.attachmentPath != null ? '/complaints_images/' + complaint.attachmentPath : '/images/placeholder.png'}"
+                         alt="Complaint Image" 
+                         style="max-width: 100px; max-height: 100px;" />
+                </td>
+                <td th:text="${complaint.description}"></td>
+                <td th:text="${complaint.status}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
 </html>
