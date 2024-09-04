@@ -16,8 +16,12 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
-    private final PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private ComplaintService complaintService;
 
+    private final PasswordEncoder passwordEncoder;
+    
     @Lazy
     public AdminController(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -29,11 +33,11 @@ public class AdminController {
     }
 
     @PostMapping("/admin/admin_register")
-    public ModelAndView registerAdmin(@RequestParam("name") String name,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password) {
+    public ModelAndView registerAdmin(@RequestParam("adminName") String name,
+                                      @RequestParam("adminEmail") String email,
+                                      @RequestParam("password") String password) {
         Admin admin = new Admin();
-        admin.setAdminName(name);
+        admin.setName(name);
         admin.setEmail(email);
         admin.setPassword(passwordEncoder.encode(password));
         adminService.saveAdmin(admin);
@@ -45,14 +49,24 @@ public class AdminController {
     public String showAdminLoginForm() {
         return "admin_login";
     }
-
+    
     @GetMapping("/admin/admin_dashboard")
-    public String showAdminDashboard(Model model, Authentication authentication) {
-        return "admin_dashboard";
+    public String showAdminDashboard(Model model,Authentication authentication) {
+        return "admin_dashboard";  
     }
-
     @GetMapping("/admin/allComplaints")
     public String viewAllComplaints(Model model, Authentication authentication) {
         return "all_complaints"; // This should be the name of your HTML file
+    }
+    @GetMapping("/admin/pendingComplaints")
+    public String viewPendingComplaints(Model model) {
+        model.addAttribute("complaints", complaintService.getComplaintsByStatus("Pending"));
+        return "pending_complaints"; // Create a Thymeleaf template for this
+    }
+    @PostMapping("/admin/updateComplaintStatus")
+    public ModelAndView updateComplaintStatus(@RequestParam("id") String id,
+                                               @RequestParam("status") String status) {
+        complaintService.updateComplaintStatus(id, status);
+        return new ModelAndView("redirect:/admin/pendingComplaints");
     }
 }

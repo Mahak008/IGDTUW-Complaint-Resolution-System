@@ -10,14 +10,15 @@ public class Complaint {
     private String id;
     private String enrollmentNumber;
     private String name;
+    private String mobile;
     private String email;
     private String course;
     private String department;
     private String complaintType;
     private String description;
-    private String attachmentPath;
+    private String attachmentPath; // Path to the uploaded file
     private String status;
-
+    
     public Complaint() {
         this.status = "Pending"; // Default status
     }
@@ -44,6 +45,14 @@ public class Complaint {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getEmail() {
@@ -93,7 +102,6 @@ public class Complaint {
     public void setAttachmentPath(String attachmentPath) {
         this.attachmentPath = attachmentPath;
     }
-
     public String getStatus() {
         return status;
     }
