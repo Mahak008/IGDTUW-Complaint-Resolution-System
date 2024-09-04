@@ -140,7 +140,7 @@ body {
 
 .table th {
   position: relative;
-  padding-right: 30px; 
+  padding-right: 30px;
 }
 
 .table th .dropdown-icon {
@@ -150,7 +150,8 @@ body {
   transform: translateY(-50%);
 }
 
-.dropdown-menu {
+.dropdown-menu,
+.dropdown-status {
   display: none;
   position: absolute;
   background-color: white;
@@ -159,7 +160,8 @@ body {
   z-index: 1;
 }
 
-.dropdown-menu a {
+.dropdown-menu a,
+.dropdown-status a {
   display: block;
   padding: 8px 16px;
   text-decoration: none;

@@ -19,7 +19,6 @@ public class AdminController {
     
     @Autowired
     private ComplaintService complaintService;
-
     private final PasswordEncoder passwordEncoder;
     
     @Lazy
@@ -37,7 +36,7 @@ public class AdminController {
                                       @RequestParam("adminEmail") String email,
                                       @RequestParam("password") String password) {
         Admin admin = new Admin();
-        admin.setName(name);
+        admin.setAdminName(name);
         admin.setEmail(email);
         admin.setPassword(passwordEncoder.encode(password));
         adminService.saveAdmin(admin);
@@ -54,15 +53,18 @@ public class AdminController {
     public String showAdminDashboard(Model model,Authentication authentication) {
         return "admin_dashboard";  
     }
+
     @GetMapping("/admin/allComplaints")
     public String viewAllComplaints(Model model, Authentication authentication) {
         return "all_complaints"; // This should be the name of your HTML file
     }
+    
     @GetMapping("/admin/pendingComplaints")
     public String viewPendingComplaints(Model model) {
         model.addAttribute("complaints", complaintService.getComplaintsByStatus("Pending"));
         return "pending_complaints"; // Create a Thymeleaf template for this
     }
+    
     @PostMapping("/admin/updateComplaintStatus")
     public ModelAndView updateComplaintStatus(@RequestParam("id") String id,
                                                @RequestParam("status") String status) {

@@ -1,47 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Complaints</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/dashboard.css">
-</head>
-<body>
-	<nav class="navbar">
-        <a href="/student/student" class="navbar-link">Dashboard</a>
-        
-        <div class="profile-dropdown">
-            <input type="checkbox" id="profile-toggle" class="profile-toggle">
-        
-            <label for="profile-toggle" class="profile-link">
-            	<img th:src="@{${profileImageUrl}}" alt="Profile Icon" class="profile-icon"/>
-            </label>
-        
-            <div class="dropdown-content">
-                <a href="/student/student_profile">My Profile</a>
-                <a href="/student/logout">Logout</a>
-            </div>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <a href="/student/dashboard" class="navbar-link">Dashboard</a>
+
+      <div class="profile-dropdown">
+        <input type="checkbox" id="profile-toggle" class="profile-toggle" />
+
+        <label for="profile-toggle" class="profile-link">
+          <img
+            th:src="@{${profileImageUrl}}"
+            alt="Profile Icon"
+            class="profile-icon"
+          />
+        </label>
+
+        <div class="dropdown-content">
+          <a href="/student/student_profile">My Profile</a>
+          <a href="/student/logout">Logout</a>
         </div>
+      </div>
     </nav>
+
     <div class="container mt-5">
-        <h2>My Complaints</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Complaint Type</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="complaint : ${complaints}">
-                    <td th:text="${complaint.complaintType}"></td>
-                    <td th:text="${complaint.description}"></td>
-                    <td th:text="${complaint.status}"></td>
-                </tr>
-            </tbody>
-        </table>
+      <h2 style="text-align: center; margin-bottom: 10px">My Complaints</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              Complaint Type
+              <i
+                class="fas fa-chevron-down dropdown-icon"
+                id="dropdown-toggle"
+              ></i>
+              <div class="dropdown-menu" id="dropdown-menu">
+                <a href="#" class="dropdown-item" data-filter="all">All</a>
+                <a href="#" class="dropdown-item" data-filter="Academics">Academics</a>
+                <a href="#" class="dropdown-item" data-filter="Administrative">Administrative</a>
+                <a href="#" class="dropdown-item" data-filter="Sanitation">Sanitation</a>
+                <a href="#" class="dropdown-item" data-filter="Technical">Technical</a>
+                <a href="#" class="dropdown-item" data-filter="Others">Others</a>
+              </div>
+            </th>
+
+            <th>Description</th>
+            <th>
+              Status
+              <i
+                class="fas fa-chevron-down dropdown-icon"
+                id="dropdown-toggler"
+              ></i>
+              <div class="dropdown-status" id="dropdown-status">
+                <a href="#" class="dropdown-item" data-filter="All">All</a>
+                <a href="#" class="dropdown-item" data-filter="Pending">Pending</a>
+                <a href="#" class="dropdown-item" data-filter="Rejected">Rejected</a>
+                <a href="#" class="dropdown-item" data-filter="Approved">Approved</a>
+                <a href="#" class="dropdown-item" data-filter="Resolved">Resolved</a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody id="complaint-table-body">
+          <tr th:each="complaint : ${complaints}" class="complaint-row">
+            <td th:text="${complaint.complaintType}"></td>
+            <td th:text="${complaint.description}"></td>
+            <td th:text="${complaint.status}"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</body>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
 </html>

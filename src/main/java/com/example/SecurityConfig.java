@@ -32,27 +32,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain studentSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .securityMatcher("/student/**", "/complaint/**")
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/student/login", "/student/register", "/css/**", "/images/**").permitAll()
-                .requestMatchers("/student/student", "/complaint").hasRole("STUDENT")
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                .loginPage("/student/login")
-                .loginProcessingUrl("/student/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .permitAll()
-                .defaultSuccessUrl("/student/student", true)
-                .failureUrl("/student/login?error=true")
-            )
-            .logout(logout -> logout
-                .permitAll()
-                .logoutUrl("/student/logout")
-                .logoutSuccessUrl("/student/login?logout=true")
-            )
-            .csrf(csrf -> csrf.disable());
+                .securityMatcher("/student/**", "/complaint/**")
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/student/login", "/student/register", "/css/**", "/js/**", "/images/**",
+                                "/user_profile/**")
+                        .permitAll()
+                        .requestMatchers("/student/dashboard", "/complaint", "/student_profile").hasRole("STUDENT")
+                        .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/student/login")
+                        .loginProcessingUrl("/student/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .permitAll()
+                        .defaultSuccessUrl("/student/dashboard", true)
+                        .failureUrl("/student/login?error=true")
+                        .successHandler((request, response, authentication) -> {
+                            logger.info("Student login successful: {}", authentication.getName());
+                            response.sendRedirect("/student/dashboard");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            logger.error("Student login failed: {}", exception.getMessage());
+                            response.sendRedirect("/student/login?error=true");
+                        }))
+                .logout(logout -> logout
+                        .permitAll()
+                        .logoutUrl("/student/logout")
+                        .logoutSuccessUrl("/student/login?logout=true"))
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
@@ -60,35 +67,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain adminSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .securityMatcher("/admin/**")
-            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/admin/admin_login", "/admin/admin_register", "/css/**", "/images/**").permitAll()
-                .requestMatchers("/admin/admin_dashboard").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .formLogin(formLogin -> formLogin
-                .loginPage("/admin/admin_login")
-                .loginProcessingUrl("/admin/admin_login")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .permitAll()
-                .defaultSuccessUrl("/admin/admin_dashboard", true)
-                .failureUrl("/admin/admin_login?error=true")
-                .successHandler((request, response, authentication) -> {
-                    logger.info("Admin login successful: {}", authentication.getName());
-                    response.sendRedirect("/admin/admin_dashboard");
-                })
-                .failureHandler((request, response, exception) -> {
-                    logger.error("Admin login failed: {}", exception.getMessage());
-                    response.sendRedirect("/admin/admin_login?error=true");
-                })
-            )
-            .logout(logout -> logout
-                .permitAll()
-                .logoutUrl("/admin/logout")
-                .logoutSuccessUrl("/admin/admin_login?logout=true")
-            )
-            .csrf(csrf -> csrf.disable());
+                .securityMatcher("/admin/**")
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/admin/admin_login", "/admin/admin_register", "/css/**", "/images/**",
+                                "/user_profile/**")
+                        .permitAll()
+                        .requestMatchers("/admin/admin_dashboard").hasRole("ADMIN")
+                        .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/admin/admin_login")
+                        .loginProcessingUrl("/admin/admin_login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .permitAll()
+                        .defaultSuccessUrl("/admin/admin_dashboard", true)
+                        .failureUrl("/admin/admin_login?error=true")
+                        .successHandler((request, response, authentication) -> {
+                            logger.info("Admin login successful: {}", authentication.getName());
+                            response.sendRedirect("/admin/admin_dashboard");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            logger.error("Admin login failed: {}", exception.getMessage());
+                            response.sendRedirect("/admin/admin_login?error=true");
+                        }))
+                .logout(logout -> logout
+                        .permitAll()
+                        .logoutUrl("/admin/logout")
+                        .logoutSuccessUrl("/admin/admin_login?logout=true"))
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }

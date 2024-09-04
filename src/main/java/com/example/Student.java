@@ -13,7 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Student implements UserDetails {
 
     private static final long serialVersionUID = 1L;
-    
+
+    // with this name, the field will be stored in database
     @Id
     private String id;
 
@@ -34,7 +35,7 @@ public class Student implements UserDetails {
 
     @Field("department")
     private String department;
-    
+
     @Field("photo_path")
     private String photoPath;
 
@@ -125,6 +126,7 @@ public class Student implements UserDetails {
     public void setDepartment(String department) {
         this.department = department;
     }
+
     public String getPhotoPath() {
         return photoPath;
     }
