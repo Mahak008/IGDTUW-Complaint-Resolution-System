@@ -55,7 +55,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/allComplaints")
-    public String viewAllComplaints(Model model, Authentication authentication) {
+    public String viewAllComplaints(Model model) {
+    	List<Complaint> allComplaints = complaintService.getAllComplaints();
+        model.addAttribute("complaints", allComplaints);
         return "all_complaints"; // This should be the name of your HTML file
     }
     

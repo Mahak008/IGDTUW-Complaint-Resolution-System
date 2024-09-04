@@ -147,9 +147,9 @@ public class StudentController {
         String email = authentication.getName(); // Get logged-in user's email
         Student student = studentService.findStudentByEmail(email); // Fetch student details from DB
 
+        // Correctly format the profile image URL
         String profileImageUrl = student.getPhotoPath() != null ? "/user_profile/" + student.getPhotoPath()
                 : "/images/user-profile.jpg";
-                
         model.addAttribute("student", student);
         model.addAttribute("profileImageUrl", profileImageUrl);
         model.addAttribute("complaints", allComplaints);
