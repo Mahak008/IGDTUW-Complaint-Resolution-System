@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class AdminController {
 
@@ -58,7 +60,7 @@ public class AdminController {
     public String viewAllComplaints(Model model) {
     	List<Complaint> allComplaints = complaintService.getAllComplaints();
         model.addAttribute("complaints", allComplaints);
-        return "all_complaints"; // This should be the name of your HTML file
+        return "all_complaints";
     }
     
     @GetMapping("/admin/pendingComplaints")
