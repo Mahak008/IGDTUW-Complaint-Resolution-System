@@ -11,15 +11,10 @@ import java.util.Collections;
 
 @Document(collection = "admin_details")
 public class Admin implements UserDetails {
+    private static final long serialVersionUID = 1L;
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
+    @Id
     private String id;
-
     private String email;
     private String name;
     private String password;
@@ -58,24 +53,24 @@ public class Admin implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getAdminName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setAdminName(String name) {
+        this.name = name;
+    }
 }

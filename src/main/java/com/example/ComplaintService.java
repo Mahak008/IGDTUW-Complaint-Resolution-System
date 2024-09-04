@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class ComplaintService {
 
     private static final Logger logger = LoggerFactory.getLogger(ComplaintService.class);
-
     private final ComplaintRepository complaintRepository;
 
     @Autowired
@@ -28,27 +27,27 @@ public class ComplaintService {
             throw new RuntimeException("Failed to register complaint", e);
         }
     }
-    
+
     // method to get all complaints
     public List<Complaint> getAllComplaints() {
         return complaintRepository.findAll();
     }
-    
- // Method to get complaints by student's enrollment number
+
+    // Method to get complaints by student's enrollment number
     public List<Complaint> getComplaintsByEmail(String email) {
         return complaintRepository.findByEmail(email);
     }
-    
- // Method to get complaints by status
+
+    // Method to get complaints by status
     public List<Complaint> getComplaintsByStatus(String status) {
         return complaintRepository.findByStatus(status);
     }
 
     // Method to update the status of a complaint
     public void updateComplaintStatus(String id, String status) {
-        Complaint complaint = complaintRepository.findById(id).orElseThrow(() -> new RuntimeException("Complaint not found"));
+        Complaint complaint = complaintRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Complaint not found"));
         complaint.setStatus(status);
         complaintRepository.save(complaint);
     }
-
 }
