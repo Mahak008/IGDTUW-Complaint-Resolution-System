@@ -34,8 +34,8 @@ public class SecurityConfig {
         http
             .securityMatcher("/student/**", "/complaint/**")
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/student/login", "/student/register", "/css/**", "/images/**", "/user_profile/**").permitAll()
-                .requestMatchers("/student/dashboard", "/complaint").hasRole("STUDENT")
+                .requestMatchers("/student/login", "/student/register", "/css/**", "/images/**").permitAll()
+                .requestMatchers("/student/student", "/complaint").hasRole("STUDENT")
                 .anyRequest().authenticated()
             )
             .formLogin(formLogin -> formLogin
@@ -44,16 +44,8 @@ public class SecurityConfig {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll()
-                .defaultSuccessUrl("/student/dashboard", true)
+                .defaultSuccessUrl("/student/student", true)
                 .failureUrl("/student/login?error=true")
-                .successHandler((request, response, authentication) -> {
-                    logger.info("Student login successful: {}", authentication.getName());
-                    response.sendRedirect("/student/dashboard");
-                })
-                .failureHandler((request, response, exception) -> {
-                    logger.error("Student login failed: {}", exception.getMessage());
-                    response.sendRedirect("/student/login?error=true");
-                })
             )
             .logout(logout -> logout
                 .permitAll()
@@ -70,7 +62,7 @@ public class SecurityConfig {
         http
             .securityMatcher("/admin/**")
             .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/admin/admin_login", "/admin/admin_register", "/css/**", "/images/**", "/user_profile/**").permitAll()
+                .requestMatchers("/admin/admin_login", "/admin/admin_register", "/css/**", "/images/**").permitAll()
                 .requestMatchers("/admin/admin_dashboard").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

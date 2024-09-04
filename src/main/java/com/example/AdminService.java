@@ -27,7 +27,6 @@ public class AdminService implements UserDetailsService {
     public Admin saveAdmin(Admin admin) {
         return adminRepository.save(admin);
     }
-
     public Admin findAdminByEmail(String email) {
         return adminRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Admin not found"));
