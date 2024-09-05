@@ -44,6 +44,13 @@ public class StudentController {
             @RequestParam("photo") MultipartFile photo,
             Model model) {
 
+        // Check if the email has the required domain
+        String requiredDomain = "@igdtuw.ac.in";
+        if (!email.endsWith(requiredDomain)) {
+            model.addAttribute("error", "Email must be from the domain @igdtuw.ac.in.");
+            return "register"; // Return to the registration page with the error message
+        }
+
         // Handle the photo upload
         String photoPath = null;
         try {
