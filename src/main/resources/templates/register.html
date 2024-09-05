@@ -29,6 +29,12 @@
     <div class="container">
       <h2>Student Registration Form</h2>
 
+      <!-- Display server-side error message -->
+		<div th:if="${error}" class="error-message">
+		    <p th:text="${error}"></p>
+		    <button type="button" class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+		</div>
+
       <form
         action="/student/register"
         method="post"
