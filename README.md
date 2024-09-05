@@ -49,7 +49,6 @@ spring.data.mongodb.uri=mongodb://localhost:27017/your-database-name
 - src/main/resources: Configuration files and static resources (e.g., application.properties)
 - src/main/resources/static: Static files like CSS, JavaScript, and images
 - src/main/resources/templates: Thymeleaf templates for rendering HTML
-- src/test/java: Unit and integration tests
 - pom.xml: Maven build file
 
 ## Contributing
