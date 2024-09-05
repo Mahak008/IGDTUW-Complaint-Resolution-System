@@ -16,6 +16,7 @@ This project is a university complaint resolution system developed with Spring B
 - **Spring Boot**: Framework for creating the backend and managing application configuration.
 - **HTML/CSS**: For structuring and styling the web pages.
 - **Bootstrap**: For responsive and modern design components.
+- **Javascript**: For enhancing interactivity and client-side scripting.
 - **MongoDB**: NoSQL database for data storage.
 - **Maven**: Build automation and dependency management.
 - **Eclipse IDE**: Integrated development environment used for development.
@@ -56,10 +57,9 @@ spring.data.mongodb.uri=mongodb://localhost:27017/your-database-name
 If you want to contribute to this project, please follow these steps:
 
 1. **Fork the repository**: Click the "Fork" button at the top right of the repository page to create your own copy.
-2. **Create a new branch**: Switch to a new branch for your changes.
-3. **Commit your changes**: Add your changes and commit them with a meaningful message.
-4. **Push to the branch**: Push your changes to your forked repository.
-5. **Create a new Pull Request**: Navigate to the original repository and click on "New Pull Request". Provide a description of your changes and submit the pull request for review.
+2. **Commit your changes**: Add your changes and commit them with a meaningful message.
+3. **Push to the branch**: Push your changes to your forked repository.
+4. **Create a new Pull Request**: Navigate to your repository and click on "New Pull Request". Provide a description of your changes and submit the pull request for review.
 
 ## Show some ❤️
 If you like this project, please give it a ⭐ on [Github](https://github.com/Mahak008/IGDTUW-Complaint-Resolution-System)
